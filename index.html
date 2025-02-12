@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saviour - Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="logo">
+                <h2>Saviour</h2>
+            </div>
+            
+            <button class="transfer-btn">Transfer money</button>
+            
+            <ul class="nav-links">
+                <li class="active" data-page="dashboard">
+                    <span class="icon">⊞</span>
+                    Dashboard
+                </li>
+                <li data-page="cards">
+                    <span class="icon">💳</span>
+                    Cards
+                </li>
+                <li data-page="subscriptions">
+                    <span class="icon">📄</span>
+                    Subscriptions
+                </li>
+                <li data-page="transactions">
+                    <span class="icon">⏱</span>
+                    Transactions
+                </li>
+                <li data-page="loans">
+                    <span class="icon">💰</span>
+                    Loans
+                </li>
+                <li data-page="support">
+                    <span class="icon">⚙️</span>
+                    Support
+                </li>
+            </ul>
+            
+            <div class="upgrade-section">
+                <p>Start saving!</p>
+                <button class="upgrade-btn">Upgrade to PRO</button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <h1>Overview</h1>
+                <div class="header-right">
+                    <span class="notifications">🔔</span>
+                    <span class="profile">👤</span>
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <!-- Card Section -->
+                <div class="card-section">
+                    <div class="virtual-card">
+                        <div class="card-logos">
+                            <span class="mastercard-logo">○○</span>
+                            <span class="apple-pay">₹</span>
+                        </div>
+                        <div class="card-number">•••• •••• •••• 5610</div>
+                        <div class="card-details">
+                            <div class="valid-thru">
+                                <span>VALID THRU</span>
+                                <span>05/27</span>
+                            </div>
+                            <div class="card-holder">
+                                <span>CARD HOLDER</span>
+                                <span>John Doe</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Networth Section -->
+                    <div class="networth-section">
+                        <h2>Networth</h2>
+                        <h1>$12,08,592</h1>
+                        <div class="financial-breakdown">
+                            <div class="breakdown-item">
+                                <span> Current Balance</span>
+                                <span class="amount blue">$2,03,050</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span>Credits</span>
+                                <span class="amount green">$10,05,442</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span>Debits</span>
+                                <span class="amount red">$70,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="charts-section">
+                    <div class="credit-usage">
+                        <h3>Debits</h3>
+                        <div class="chart-container">
+                            <canvas id="creditChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="spending-insights">
+                        <h3>Spending Insights</h3>
+                        <div class="chart-container">
+                            <canvas id="spendingChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+</html> 

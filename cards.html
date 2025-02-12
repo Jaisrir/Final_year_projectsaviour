@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saviour - Cards</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cards.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="logo">
+                <h2>Saviour</h2>
+            </div>
+            
+            <button class="transfer-btn">Transfer money</button>
+            
+            <ul class="nav-links">
+                <li data-page="dashboard">
+                    <span class="icon">⊞</span>
+                    Dashboard
+                </li>
+                <li class="active" data-page="cards">
+                    <span class="icon">💳</span>
+                    Cards
+                </li>
+                <li data-page="subscriptions">
+                    <span class="icon">📄</span>
+                    Subscriptions
+                </li>
+                <li data-page="transactions">
+                    <span class="icon">⏱</span>
+                    Transactions
+                </li>
+                <li data-page="loans">
+                    <span class="icon">💰</span>
+                    Loans
+                </li>
+                <li data-page="support">
+                    <span class="icon">⚙️</span>
+                    Support
+                </li>
+            </ul>
+            
+            <div class="upgrade-section">
+                <p>Start saving!</p>
+                <button class="upgrade-btn">Upgrade to PRO</button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <h1>Cards Management</h1>
+                <div class="header-right">
+                    <span class="notifications">🔔</span>
+                    <span class="profile">👤</span>
+                </div>
+            </header>
+
+            <div class="cards-container">
+                <!-- Existing Cards Section -->
+                <section class="existing-cards">
+                    <h2>Your Cards</h2>
+                    <div class="cards-grid">
+                        <!-- Sample Card -->
+                        <div class="card">
+                            <button class="remove-card-btn" aria-label="Remove card">×</button>
+                            <div class="card-logos">
+                                <span class="mastercard-logo">○○</span>
+                                <span class="apple-pay"> ₹</span>
+                            </div>
+                            <div class="card-number">•••• •••• •••• 5610</div>
+                            <div class="card-details">
+                                <div class="valid-thru">
+                                    <span>VALID THRU</span>
+                                    <span>05/27</span>
+                                </div>
+                                <div class="card-holder">
+                                    <span>CARD HOLDER</span>
+                                    <span>John Doe</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Add New Card Form -->
+                <section class="add-card-section">
+                    <h2>Add New Card</h2>
+                    <form id="addCardForm" class="card-form">
+                        <div class="form-group">
+                            <label for="cardHolder">Card Holder Name</label>
+                            <input type="text" id="cardHolder" required placeholder="Enter card holder name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cardNumber">Card Number</label>
+                            <input type="text" id="cardNumber" required placeholder="1234 5678 9012 3456" maxlength="19">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="expiryDate">Expiry Date</label>
+                                <input type="text" id="expiryDate" required placeholder="MM/YY" maxlength="5">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="cvv">CVV</label>
+                                <input type="password" id="cvv" required placeholder="***" maxlength="3">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cardType">Card Type</label>
+                            <select id="cardType" required>
+                                <option value="">Select card type</option>
+                                <option value="visa">Visa</option>
+                                <option value="mastercard">Mastercard</option>
+                                <option value="amex">American Express</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Add Card</button>
+                    </form>
+                </section>
+            </div>
+        </main>
+    </div>
+    <script src="js/cards.js"></script>
+</body>
+</html> 
