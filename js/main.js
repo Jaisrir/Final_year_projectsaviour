@@ -8,8 +8,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const page = this.getAttribute('data-page');
             if (page === 'cards') {
                 window.location.href = 'cards.html';
+            } else if (page === 'dashboard') {
+                window.location.href = 'index.html';
+            } else if (page === 'profile') {
+                window.location.href = 'profile.html';
             }
-            // You can add page navigation logic here
         });
     });
 
@@ -79,5 +82,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Upgrade button functionality
     document.querySelector('.upgrade-btn').addEventListener('click', function() {
         alert('Upgrade to PRO coming soon!');
+    });
+
+    // Profile icon click event
+    const profileIcon = document.querySelector('.header-right .profile');
+    profileIcon.addEventListener('click', function() {
+        window.location.href = 'profile.html'; // Navigate to profile page
     });
 }); 
