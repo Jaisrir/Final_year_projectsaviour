@@ -18,58 +18,21 @@ document.addEventListener('DOMContentLoaded', function() {
     navLinks.forEach(link => {
         link.addEventListener('click', function() {
             const page = this.getAttribute('data-page');
-            if (page === 'dashboard') {
-                window.location.href = 'index.html';
+            switch(page) {
+                case 'dashboard':
+                    window.location.href = 'index.html';
+                    break;
+                case 'cards':
+                    window.location.href = 'cards.html';
+                    break;
+                case 'transactions':
+                    window.location.href = 'transactions.html';
+                    break;
+                case 'profile':
+                    window.location.href = 'profile.html';
+                    break;
             }
-            // Add other page navigations as needed
         });
-    });
-
-    // Card Form Handling
-    const cardForm = document.getElementById('addCardForm');
-    const cardNumber = document.getElementById('cardNumber');
-    const expiryDate = document.getElementById('expiryDate');
-
-    // Format card number with spaces
-    cardNumber.addEventListener('input', function(e) {
-        let value = e.target.value.replace(/\s/g, '').replace(/[^0-9]/gi, '');
-        let formattedValue = '';
-        for(let i = 0; i < value.length; i++) {
-            if(i > 0 && i % 4 === 0) {
-                formattedValue += ' ';
-            }
-            formattedValue += value[i];
-        }
-        e.target.value = formattedValue;
-    });
-
-    // Format expiry date
-    expiryDate.addEventListener('input', function(e) {
-        let value = e.target.value.replace(/\D/g, '');
-        if (value.length >= 2) {
-            value = value.slice(0,2) + '/' + value.slice(2);
-        }
-        e.target.value = value;
-    });
-
-    // Form submission
-    cardForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Get form values
-        const formData = {
-            cardHolder: document.getElementById('cardHolder').value,
-            cardNumber: cardNumber.value,
-            expiryDate: expiryDate.value,
-            cvv: document.getElementById('cvv').value,
-            cardType: document.getElementById('cardType').value
-        };
-
-        // Add card to grid (in real app, this would be sent to a server)
-        addCardToGrid(formData);
-        
-        // Reset form
-        cardForm.reset();
     });
 });
 

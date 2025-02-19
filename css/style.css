@@ -68,23 +68,170 @@ body {
     color: white;
 }
 
-.upgrade-section {
+.chatbot-section {
     margin-top: auto;
-    text-align: center;
-    padding: 20px;
-    background-color: #f8f9fe;
-    border-radius: 12px;
+    position: relative;
 }
 
-.upgrade-btn {
-    background-color: transparent;
-    color: var(--primary-color);
-    border: 1px solid var(--primary-color);
-    padding: 8px 16px;
-    border-radius: 6px;
-    margin-top: 10px;
+.chatbot-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 12px;
+    width: 100%;
     cursor: pointer;
-} 
+    transition: all 0.3s ease;
+}
+
+.chatbot-toggle:hover {
+    background-color: #6344fa;
+}
+
+.bot-icon {
+    font-size: 20px;
+}
+
+.chatbot-popup {
+    position: fixed;
+    bottom: 20px;
+    left: 270px;
+    width: 300px;
+    height: 400px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    display: none;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.chatbot-popup.active {
+    display: flex;
+}
+
+.chatbot-header {
+    padding: 15px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-chat {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.message {
+    max-width: 80%;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 5px 0;
+}
+
+.message.user {
+    background: #e3e3e3;
+    align-self: flex-end;
+}
+
+.message.bot {
+    background: var(--primary-color);
+    color: white;
+    align-self: flex-start;
+}
+
+.chat-input {
+    padding: 15px;
+    display: flex;
+    gap: 10px;
+    border-top: 1px solid #eee;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+}
+
+.chat-input button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .apple-pay{
     font-size:25px;
 }
+
+<script src="js/chatbot.js"></script>
+
+<div class="chatbot-section">
+    <button class="chatbot-toggle">
+        <span class="bot-icon">🤖</span>
+        <span class="bot-text">AI Assistant</span>
+    </button>
+    
+    <!-- Chatbot Popup -->
+    <div class="chatbot-popup" id="chatbotPopup">
+        <div class="chatbot-header">
+            <h3>AI Assistant</h3>
+            <button class="close-chat">×</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <!-- Messages will be added here -->
+            <div class="message bot">
+                Hello! How can I help you today?
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Type your message...">
+            <button id="sendMessage">
+                <span>➤</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<nav class="sidebar">
+    <div class="logo">
+        <h2>Saviour</h2>
+    </div>
+    
+    <button class="transfer-btn">Transfer money</button>
+    
+    <ul class="nav-links">
+        <!-- navigation links -->
+    </ul>
+    
+    <!-- Add the chatbot section here -->
+    <div class="chatbot-section">
+        <!-- chatbot code -->
+    </div>
+</nav>

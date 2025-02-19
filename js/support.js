@@ -12,10 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 window.location.href = 'index.html';
             } else if (page === 'profile') {
                 window.location.href = 'profile.html';
-            } else if (page === 'loans') {
-                window.location.href = 'loan.html';
-            } else if (page === 'support') {
-                window.location.href = 'support.html';
+            } else if (page === 'transactions') {
+                window.location.href = 'transactions.html';
             }
         });
     });
