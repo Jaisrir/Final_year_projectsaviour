@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saviour - Transactions</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/transactions.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="logo">
+                <h2>Saviour</h2>
+            </div>
+            
+            <button class="transfer-btn">Transfer money</button>
+            
+            <ul class="nav-links">
+                <li data-page="dashboard">
+                    <span class="icon">⊞</span>
+                    Dashboard
+                </li>
+                <li data-page="cards">
+                    <span class="icon">💳</span>
+                    Cards
+                </li>
+                <li class="active" data-page="transactions">
+                    <span class="icon">⏱</span>
+                    Transactions
+                </li>
+                <li data-page="profile">
+                    <span class="icon">👤</span>
+                    Profile
+                </li>
+            </ul>
+            
+            <div class="chatbot-section">
+                <button class="chatbot-toggle">
+                    <span class="bot-icon">🤖</span>
+                    <span class="bot-text">AI Assistant</span>
+                </button>
+                
+                <!-- Chatbot Popup -->
+                <div class="chatbot-popup" id="chatbotPopup">
+                    <div class="chatbot-header">
+                        <h3>AI Assistant</h3>
+                        <button class="close-chat">×</button>
+                    </div>
+                    <div class="chat-messages" id="chatMessages">
+                        <!-- Messages will be added here -->
+                        <div class="message bot">
+                            Hello! How can I help you today?
+                        </div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="userInput" placeholder="Type your message...">
+                        <button id="sendMessage">
+                            <span>➤</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <h1>Transactions Management</h1>
+                <div class="header-right">
+                    <span class="notifications">🔔</span>
+                    <a href="profile.html" class="profile">👤</a>
+                </div>
+            </header>
+
+            <div class="transactions-container">
+                <!-- Left Side: Transaction History -->
+                <div class="transactions-history">
+                    <!-- Credits Section -->
+                    <div class="history-section credits-history">
+                        <h2>Credits History</h2>
+                        <div class="transaction-list" id="creditsList">
+                            <!-- Sample Credit Items -->
+                            <div class="transaction-item credit">
+                                <div class="transaction-content">
+                                    <h3>Salary</h3>
+                                    <p class="amount">+₹5,000</p>
+                                    <p class="date">2024-03-15</p>
+                                </div>
+                                <div class="transaction-actions">
+                                    <button class="edit-btn">✎</button>
+                                    <button class="delete-btn">×</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Debits Section -->
+                    <div class="history-section debits-history">
+                        <h2>Debits History</h2>
+                        <div class="transaction-list" id="debitsList">
+                            <!-- Sample Debit Items -->
+                            <div class="transaction-item debit">
+                                <div class="transaction-content">
+                                    <h3>Rent</h3>
+                                    <p class="amount">-₹2,000</p>
+                                    <p class="date">2024-03-01</p>
+                                </div>
+                                <div class="transaction-actions">
+                                    <button class="edit-btn">✎</button>
+                                    <button class="delete-btn">×</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side: Add Transaction Form -->
+                <div class="add-transaction-section">
+                    <h2>Add Transaction</h2>
+                    <form id="addTransactionForm">
+                        <div class="form-group">
+                            <label for="transactionType">Transaction Type</label>
+                            <select id="transactionType" required>
+                                <option value="credit">Credit</option>
+                                <option value="debit">Debit</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <input type="text" id="description" required placeholder="e.g., Rent, Salary, etc.">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="amount">Amount</label>
+                            <input type="number" id="amount" required placeholder="Enter amount">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="date">Date</label>
+                            <input type="date" id="date" required>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Add Transaction</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="js/chatbot.js"></script>
+    <script src="js/transactions.js"></script>
+</body>
+</html>

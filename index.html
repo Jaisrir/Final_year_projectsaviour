@@ -27,21 +27,9 @@
                     <span class="icon">💳</span>
                     Cards
                 </li>
-                <li data-page="subscriptions">
-                    <span class="icon">📄</span>
-                    Subscriptions
-                </li>
                 <li data-page="transactions">
                     <span class="icon">⏱</span>
                     Transactions
-                </li>
-               <a href="loan.html"> <li data-page="loans">
-                    <span class="icon">💰</span>
-                    Loans
-                </li></a>
-                <li data-page="support">
-                    <span class="icon">⚙️</span>
-                    Support
                 </li>
                 <li data-page="profile">
                     <span class="icon">👤</span>
@@ -49,9 +37,31 @@
                 </li>
             </ul>
             
-            <div class="upgrade-section">
-                <p>Start saving!</p>
-                <button class="upgrade-btn">Upgrade to PRO</button>
+            <div class="chatbot-section">
+                <button class="chatbot-toggle">
+                    <span class="bot-icon">🤖</span>
+                    <span class="bot-text">AI Assistant</span>
+                </button>
+                
+                <!-- Chatbot Popup -->
+                <div class="chatbot-popup" id="chatbotPopup">
+                    <div class="chatbot-header">
+                        <h3>AI Assistant</h3>
+                        <button class="close-chat">×</button>
+                    </div>
+                    <div class="chat-messages" id="chatMessages">
+                        <!-- Messages will be added here -->
+                        <div class="message bot">
+                            Hello! How can I help you today?
+                        </div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="userInput" placeholder="Type your message...">
+                        <button id="sendMessage">
+                            <span>➤</span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </nav>
 
@@ -81,7 +91,7 @@
                             </div>
                             <div class="card-holder">
                                 <span>CARD HOLDER</span>
-                                <span>John Doe</span>
+                                <span>Sriram E</span>
                             </div>
                         </div>
                     </div>
@@ -89,19 +99,19 @@
                     <!-- Networth Section -->
                     <div class="networth-section">
                         <h2>Networth</h2>
-                        <h1>$12,08,592</h1>
+                        <h1>₹12,08,592</h1>
                         <div class="financial-breakdown">
                             <div class="breakdown-item">
-                                <span> Current Balance</span>
-                                <span class="amount blue">$2,03,050</span>
+                                <span>Current Balance</span>
+                                <span class="amount blue">₹2,03,050</span>
                             </div>
                             <div class="breakdown-item">
                                 <span>Credits</span>
-                                <span class="amount green">$10,05,442</span>
+                                <span class="amount green">₹10,05,442</span>
                             </div>
                             <div class="breakdown-item">
                                 <span>Debits</span>
-                                <span class="amount red">$70,000</span>
+                                <span class="amount red">₹70,000</span>
                             </div>
                         </div>
                     </div>
@@ -125,6 +135,7 @@
             </div>
         </main>
     </div>
+    <script src="js/chatbot.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html> 
