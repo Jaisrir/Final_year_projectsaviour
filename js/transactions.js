@@ -83,4 +83,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
         return div;
     }
+
+    const saviourAiBtn = document.getElementById('saviourAiBtn');
+    const aiAssistant = document.getElementById('aiAssistantExpanded');
+    const closeAi = document.getElementById('closeAi');
+    const addTransactionSection = document.querySelector('.add-transaction-section');
+
+    saviourAiBtn.addEventListener('click', function() {
+        aiAssistant.classList.add('active');
+        addTransactionSection.classList.add('shrink');
+        saviourAiBtn.style.display = 'none';
+    });
+
+    closeAi.addEventListener('click', function() {
+        aiAssistant.classList.remove('active');
+        addTransactionSection.classList.remove('shrink');
+        saviourAiBtn.style.display = 'block';
+    });
 }); 

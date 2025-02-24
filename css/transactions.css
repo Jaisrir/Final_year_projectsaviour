@@ -173,4 +173,123 @@ html, body {
     background: #45a049;
 }
 
+.ai-assistant-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.saviour-ai-btn {
+    background: #7c5cfc;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(124, 92, 252, 0.2);
+}
+
+.saviour-ai-btn:hover {
+    background: #6344fa;
+    transform: translateY(-2px);
+}
+
+.ai-assistant-expanded {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 350px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.ai-assistant-expanded.active {
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+    transform: translateY(0);
+    height: calc(100vh - 100px);
+    margin-bottom: 60px;
+}
+
+.ai-header {
+    padding: 15px 20px;
+    background: #7c5cfc;
+    color: white;
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-ai {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.ai-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.ai-messages {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+.ai-message {
+    background: #f5f5f5;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.ai-input {
+    display: flex;
+    gap: 10px;
+}
+
+.ai-input input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    outline: none;
+}
+
+.ai-input button {
+    background: #7c5cfc;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Add this to handle the add-transaction-section animation */
+.add-transaction-section {
+    transition: all 0.3s ease;
+}
+
+.add-transaction-section.shrink {
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
 /* Your new CSS styles will go here */ 

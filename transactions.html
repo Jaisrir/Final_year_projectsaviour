@@ -39,13 +39,13 @@
             <div class="chatbot-section">
                 <button class="chatbot-toggle">
                     <span class="bot-icon">🤖</span>
-                    <span class="bot-text">AI Assistant</span>
+                    <span class="bot-text">Chatbot</span>
                 </button>
                 
                 <!-- Chatbot Popup -->
                 <div class="chatbot-popup" id="chatbotPopup">
                     <div class="chatbot-header">
-                        <h3>AI Assistant</h3>
+                        <h3>Chatbot</h3>
                         <button class="close-chat">×</button>
                     </div>
                     <div class="chat-messages" id="chatMessages">
@@ -145,6 +145,27 @@
 
                         <button type="submit" class="submit-btn">Add Transaction</button>
                     </form>
+                </div>
+
+                <!-- Add this after the add-transaction-section div -->
+                <div class="ai-assistant-container">
+                    <button class="saviour-ai-btn" id="saviourAiBtn">Saviour AI</button>
+                    <div class="ai-assistant-expanded" id="aiAssistantExpanded">
+                        <div class="ai-header">
+                            <h2>Saviour AI</h2>
+                            <button class="close-ai" id="closeAi">×</button>
+                        </div>
+                        <div class="ai-content">
+                            <!-- AI assistant content will go here -->
+                            <div class="ai-messages">
+                                <div class="ai-message">How can I help you with your transactions?</div>
+                            </div>
+                            <div class="ai-input">
+                                <input type="text" placeholder="Ask anything about your transactions...">
+                                <button>Send</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>

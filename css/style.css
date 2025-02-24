@@ -190,48 +190,4 @@ body {
     font-size:25px;
 }
 
-<script src="js/chatbot.js"></script>
-
-<div class="chatbot-section">
-    <button class="chatbot-toggle">
-        <span class="bot-icon">🤖</span>
-        <span class="bot-text">AI Assistant</span>
-    </button>
-    
-    <!-- Chatbot Popup -->
-    <div class="chatbot-popup" id="chatbotPopup">
-        <div class="chatbot-header">
-            <h3>AI Assistant</h3>
-            <button class="close-chat">×</button>
-        </div>
-        <div class="chat-messages" id="chatMessages">
-            <!-- Messages will be added here -->
-            <div class="message bot">
-                Hello! How can I help you today?
-            </div>
-        </div>
-        <div class="chat-input">
-            <input type="text" id="userInput" placeholder="Type your message...">
-            <button id="sendMessage">
-                <span>➤</span>
-            </button>
-        </div>
-    </div>
-</div>
-
-<nav class="sidebar">
-    <div class="logo">
-        <h2>Saviour</h2>
-    </div>
-    
-    <button class="transfer-btn">Transfer money</button>
-    
-    <ul class="nav-links">
-        <!-- navigation links -->
-    </ul>
-    
-    <!-- Add the chatbot section here -->
-    <div class="chatbot-section">
-        <!-- chatbot code -->
-    </div>
-</nav>
+ 
