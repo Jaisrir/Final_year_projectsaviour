@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saviour - Transactions</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/transactions.css">
+    <title>Transactions Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/transactions.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -19,20 +20,28 @@
             
             <ul class="nav-links">
                 <li data-page="dashboard">
-                    <span class="icon">⊞</span>
-                    Dashboard
+                    <a href="{{ url_for('index') }}">
+                        <span class="icon">⊞</span>
+                        Dashboard
+                    </a>
                 </li>
                 <li data-page="cards">
-                    <span class="icon">💳</span>
-                    Cards
+                    <a href="{{ url_for('cards_page') }}">
+                        <span class="icon">💳</span>
+                        Cards
+                    </a>
                 </li>
                 <li class="active" data-page="transactions">
-                    <span class="icon">⏱</span>
-                    Transactions
+                    <a href="{{ url_for('transactions_page') }}">
+                        <span class="icon">⏱</span>
+                        Transactions
+                    </a>
                 </li>
                 <li data-page="profile">
-                    <span class="icon">👤</span>
-                    Profile
+                    <a href="{{ url_for('profile') }}">
+                        <span class="icon">👤</span>
+                        Profile
+                    </a>
                 </li>
             </ul>
             
@@ -45,20 +54,18 @@
                 <!-- Chatbot Popup -->
                 <div class="chatbot-popup" id="chatbotPopup">
                     <div class="chatbot-header">
-                        <h3>Chatbot</h3>
+                        <h3>Chat Assistant</h3>
                         <button class="close-chat">×</button>
                     </div>
                     <div class="chat-messages" id="chatMessages">
                         <!-- Messages will be added here -->
                         <div class="message bot">
-                            Hello! How can I help you today?
+                            Hello! How can I help you with your transactions today?
                         </div>
                     </div>
                     <div class="chat-input">
                         <input type="text" id="userInput" placeholder="Type your message...">
-                        <button id="sendMessage">
-                            <span>➤</span>
-                        </button>
+                        <button id="sendMessage">Send</button>
                     </div>
                 </div>
             </div>
@@ -70,7 +77,7 @@
                 <h1>Transactions Management</h1>
                 <div class="header-right">
                     <span class="notifications">🔔</span>
-                    <a href="profile.html" class="profile">👤</a>
+                    <a href="{{ url_for('profile') }}" class="profile">👤</a>
                 </div>
             </header>
 
@@ -81,18 +88,19 @@
                     <div class="history-section credits-history">
                         <h2>Credits History</h2>
                         <div class="transaction-list" id="creditsList">
-                            <!-- Sample Credit Items -->
+                            {% for transaction in credits %}
                             <div class="transaction-item credit">
                                 <div class="transaction-content">
-                                    <h3>Salary</h3>
-                                    <p class="amount">+₹5,000</p>
-                                    <p class="date">2024-03-15</p>
+                                    <h3>{{ transaction.description }}</h3>
+                                    <p class="amount">+₹{{ transaction.amount }}</p>
+                                    <p class="date">{{ transaction.date }}</p>
                                 </div>
                                 <div class="transaction-actions">
                                     <button class="edit-btn">✎</button>
                                     <button class="delete-btn">×</button>
                                 </div>
                             </div>
+                            {% endfor %}
                         </div>
                     </div>
 
@@ -100,18 +108,19 @@
                     <div class="history-section debits-history">
                         <h2>Debits History</h2>
                         <div class="transaction-list" id="debitsList">
-                            <!-- Sample Debit Items -->
+                            {% for transaction in debits %}
                             <div class="transaction-item debit">
                                 <div class="transaction-content">
-                                    <h3>Rent</h3>
-                                    <p class="amount">-₹2,000</p>
-                                    <p class="date">2024-03-01</p>
+                                    <h3>{{ transaction.description }}</h3>
+                                    <p class="amount">-₹{{ transaction.amount }}</p>
+                                    <p class="date">{{ transaction.date }}</p>
                                 </div>
                                 <div class="transaction-actions">
                                     <button class="edit-btn">✎</button>
                                     <button class="delete-btn">×</button>
                                 </div>
                             </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -119,10 +128,10 @@
                 <!-- Right Side: Add Transaction Form -->
                 <div class="add-transaction-section">
                     <h2>Add Transaction</h2>
-                    <form id="addTransactionForm">
+                    <form id="addTransactionForm" action="{{ url_for('add_transaction') }}" method="POST">
                         <div class="form-group">
                             <label for="transactionType">Transaction Type</label>
-                            <select id="transactionType" required>
+                            <select id="transactionType" name="transactionType" required>
                                 <option value="credit">Credit</option>
                                 <option value="debit">Debit</option>
                             </select>
@@ -130,47 +139,58 @@
 
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <input type="text" id="description" required placeholder="e.g., Rent, Salary, etc.">
+                            <input type="text" id="description" name="description" required placeholder="e.g., Rent, Salary, etc.">
                         </div>
 
                         <div class="form-group">
                             <label for="amount">Amount</label>
-                            <input type="number" id="amount" required placeholder="Enter amount">
+                            <input type="number" id="amount" name="amount" required placeholder="Enter amount">
                         </div>
 
                         <div class="form-group">
                             <label for="date">Date</label>
-                            <input type="date" id="date" required>
+                            <input type="date" id="date" name="date" required>
                         </div>
 
                         <button type="submit" class="submit-btn">Add Transaction</button>
                     </form>
                 </div>
 
-                <!-- Add this after the add-transaction-section div -->
-                <div class="ai-assistant-container">
-                    <button class="saviour-ai-btn" id="saviourAiBtn">Saviour AI</button>
-                    <div class="ai-assistant-expanded" id="aiAssistantExpanded">
-                        <div class="ai-header">
-                            <h2>Saviour AI</h2>
-                            <button class="close-ai" id="closeAi">×</button>
+                <!-- Saviour AI -->
+                <button class="saviour-ai-btn" id="saviourAiBtn">Saviour AI</button>
+
+                <div class="saviour-ai-popup" id="saviourAIPopup">
+                    <div class="ai-header">
+                        <h3>Saviour AI Analysis</h3>
+                        <button class="close-ai">×</button>
+                    </div>
+                    <div class="ai-messages" id="aiMessages">
+                        <div class="message bot">
+                            Welcome! Upload your bank statement for a detailed financial analysis.
                         </div>
-                        <div class="ai-content">
-                            <!-- AI assistant content will go here -->
-                            <div class="ai-messages">
-                                <div class="ai-message">How can I help you with your transactions?</div>
-                            </div>
-                            <div class="ai-input">
-                                <input type="text" placeholder="Ask anything about your transactions...">
-                                <button>Send</button>
-                            </div>
+                        <div class="message bot">
+                            I can help you understand your:
+                            • Income and expenses breakdown
+                            • Spending patterns
+                            • Saving opportunities
+                            • Budget recommendations
                         </div>
+                    </div>
+                    <div class="ai-input">
+                        <label for="statementFile" class="file-upload-btn">
+                            <input type="file" id="statementFile" accept=".csv,.xls,.xlsx" style="display: none;">
+                            Upload Statement
+                        </label>
+                        <div class="file-info" id="fileInfo"></div>
                     </div>
                 </div>
             </div>
         </main>
     </div>
-    <script src="js/chatbot.js"></script>
-    <script src="js/transactions.js"></script>
+
+    <script src="{{ url_for('static', filename='js/transactions.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/saviour-ai.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/ai-analysis.js') }}"></script>
 </body>
 </html>

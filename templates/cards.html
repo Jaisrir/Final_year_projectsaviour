@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saviour - Cards</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/cards.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cards.css') }}">
 </head>
 <body>
     <div class="container">
@@ -19,33 +19,41 @@
             
             <ul class="nav-links">
                 <li data-page="dashboard">
-                    <span class="icon">⊞</span>
-                    Dashboard
+                    <a href="{{ url_for('index') }}">
+                        <span class="icon">⊞</span>
+                        Dashboard
+                    </a>
                 </li>
                 <li class="active" data-page="cards">
-                    <span class="icon">💳</span>
-                    Cards
+                    <a href="{{ url_for('cards_page') }}">
+                        <span class="icon">💳</span>
+                        Cards
+                    </a>
                 </li>
                 <li data-page="transactions">
-                    <span class="icon">⏱</span>
-                    Transactions
+                    <a href="{{ url_for('transactions_page') }}">
+                        <span class="icon">⏱</span>
+                        Transactions
+                    </a>
                 </li>
                 <li data-page="profile">
-                    <span class="icon">👤</span>
-                    Profile
+                    <a href="{{ url_for('profile') }}">
+                        <span class="icon">👤</span>
+                        Profile
+                    </a>
                 </li>
             </ul>
             
             <div class="chatbot-section">
                 <button class="chatbot-toggle">
                     <span class="bot-icon">🤖</span>
-                    <span class="bot-text">Chatbot</span>
+                    <span class="bot-text">AI Assistant</span>
                 </button>
                 
                 <!-- Chatbot Popup -->
                 <div class="chatbot-popup" id="chatbotPopup">
                     <div class="chatbot-header">
-                        <h3>Chatbot</h3>
+                        <h3>AI Assistant</h3>
                         <button class="close-chat">×</button>
                     </div>
                     <div class="chat-messages" id="chatMessages">
@@ -70,7 +78,8 @@
                 <h1>Cards Management</h1>
                 <div class="header-right">
                     <span class="notifications">🔔</span>
-                    <span class="profile">👤</span>
+                    <a href="{{ url_for('profile') }}" class="profile">👤</a>
+                    <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
                 </div>
             </header>
 
@@ -79,61 +88,64 @@
                 <section class="existing-cards">
                     <h2>Your Cards</h2>
                     <div class="cards-grid">
-                        <!-- Sample Card -->
-                        <div class="card">
-                            <button class="remove-card-btn" aria-label="Remove card">×</button>
+                        {% for card in cards %}
+                        <div class="card" data-card-id="{{ card._id }}">
+                            <button class="remove-card-btn" aria-label="Remove card" onclick="deleteCard('{{ card._id }}')">×</button>
                             <div class="card-logos">
                                 <span class="mastercard-logo">○○</span>
-                                <span class="apple-pay"> ₹</span>
+                                <span class="apple-pay">{{ card.card_type }}</span>
                             </div>
-                            <div class="card-number">•••• •••• •••• 5610</div>
+                            <div class="card-number">xxxx xxxx xxxx {{ card.card_number[-4:] }}</div>
                             <div class="card-details">
                                 <div class="valid-thru">
                                     <span>VALID THRU</span>
-                                    <span>05/27</span>
+                                    <span>{{ card.expiry_date }}</span>
                                 </div>
                                 <div class="card-holder">
                                     <span>CARD HOLDER</span>
-                                    <span>Sriram E</span>
+                                    <span>{{ card.card_holder }}</span>
                                 </div>
                             </div>
                         </div>
+                        {% endfor %}
                     </div>
                 </section>
 
                 <!-- Add New Card Form -->
                 <section class="add-card-section">
                     <h2>Add New Card</h2>
-                    <form id="addCardForm" class="card-form">
+                    <form id="addCardForm" class="card-form" method="POST" action="/cards">
                         <div class="form-group">
                             <label for="cardHolder">Card Holder Name</label>
-                            <input type="text" id="cardHolder" required placeholder="Enter card holder name">
+                            <input type="text" id="cardHolder" name="cardHolder" required placeholder="Enter card holder name">
                         </div>
 
                         <div class="form-group">
                             <label for="cardNumber">Card Number</label>
-                            <input type="text" id="cardNumber" required placeholder="1234 5678 9012 3456" maxlength="19">
+                            <input type="text" id="cardNumber" name="cardNumber" required placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCardNumber(this)">
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="expiryDate">Expiry Date</label>
-                                <input type="text" id="expiryDate" required placeholder="MM/YY" maxlength="5">
+                                <input type="text" id="expiryDate" name="expiryDate" required placeholder="MM/YY" maxlength="5">
                             </div>
 
                             <div class="form-group">
                                 <label for="cvv">CVV</label>
-                                <input type="password" id="cvv" required placeholder="***" maxlength="3">
+                                <input type="password" id="cvv" name="cvv" required placeholder="***" maxlength="3">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="cardType">Card Type</label>
-                            <select id="cardType" required>
+                            <select id="cardType" name="cardType" required>
                                 <option value="">Select card type</option>
                                 <option value="visa">Visa</option>
                                 <option value="mastercard">Mastercard</option>
                                 <option value="amex">American Express</option>
+                                <option value="rupay">Rupay</option>
+                                <option value="maestro">Maestro</option>
                             </select>
                         </div>
 
@@ -143,7 +155,32 @@
             </div>
         </main>
     </div>
-    <script src="js/chatbot.js"></script>
-    <script src="js/cards.js"></script>
+    <script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/cards.js') }}"></script>
+    <script>
+        function deleteCard(cardId) {
+            fetch(`/delete_card/${cardId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Remove the card from the DOM
+                    const cardElement = document.querySelector(`[data-card-id="${cardId}"]`);
+                    if (cardElement) {
+                        cardElement.remove();
+                    }
+                } else {
+                    alert('Failed to delete card.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
 </body>
-</html> 
+</html>

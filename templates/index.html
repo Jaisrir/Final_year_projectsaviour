@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saviour - Dashboard</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -20,20 +20,28 @@
             
             <ul class="nav-links">
                 <li class="active" data-page="dashboard">
-                    <span class="icon">⊞</span>
-                    Dashboard
+                    <a href="{{ url_for('index') }}">
+                        <span class="icon">⊞</span>
+                        Dashboard
+                    </a>
                 </li>
                 <li data-page="cards">
-                    <span class="icon">💳</span>
-                    Cards
+                    <a href="{{ url_for('cards_page') }}">
+                        <span class="icon">💳</span>
+                        Cards
+                    </a>
                 </li>
                 <li data-page="transactions">
-                    <span class="icon">⏱</span>
-                    Transactions
+                    <a href="{{ url_for('transactions_page') }}">
+                        <span class="icon">⏱</span>
+                        Transactions
+                    </a>
                 </li>
                 <li data-page="profile">
-                    <span class="icon">👤</span>
-                    Profile
+                    <a href="{{ url_for('profile') }}">
+                        <span class="icon">👤</span>
+                        Profile
+                    </a>
                 </li>
             </ul>
             
@@ -46,20 +54,18 @@
                 <!-- Chatbot Popup -->
                 <div class="chatbot-popup" id="chatbotPopup">
                     <div class="chatbot-header">
-                        <h3>Chatbot</h3>
+                        <h3>Chatbot Assistant</h3>
                         <button class="close-chat">×</button>
                     </div>
                     <div class="chat-messages" id="chatMessages">
                         <!-- Messages will be added here -->
                         <div class="message bot">
-                            Hello! How can I help you today?
+                            Hello! I'm your financial assistant. How can I help you today?
                         </div>
                     </div>
                     <div class="chat-input">
                         <input type="text" id="userInput" placeholder="Type your message...">
-                        <button id="sendMessage">
-                            <span>➤</span>
-                        </button>
+                        <button id="sendMessage">Send</button>
                     </div>
                 </div>
             </div>
@@ -71,30 +77,37 @@
                 <h1>Overview</h1>
                 <div class="header-right">
                     <span class="notifications">🔔</span>
-                    <a href="profile.html" class="profile">👤</a>
+                    <a href="{{ url_for('profile') }}" class="profile">👤</a>
+                    <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+
                 </div>
             </header>
 
             <div class="dashboard-content">
                 <!-- Card Section -->
                 <div class="card-section">
+                    <!-- Existing Virtual Cards -->
+                    {% for card in cards %}
                     <div class="virtual-card">
                         <div class="card-logos">
                             <span class="mastercard-logo">○○</span>
-                            <span class="apple-pay">₹</span>
+                            <span class="apple-pay">{{ card.card_type|upper }}</span>
                         </div>
-                        <div class="card-number">•••• •••• •••• 5610</div>
+                        <div class="card-number">
+                            {% for _ in range(3) %}•••• {% endfor %}{{ card.card_number[-4:] }}
+                        </div>
                         <div class="card-details">
                             <div class="valid-thru">
                                 <span>VALID THRU</span>
-                                <span>05/27</span>
+                                <span>{{ card.expiry_date }}</span>
                             </div>
                             <div class="card-holder">
                                 <span>CARD HOLDER</span>
-                                <span>Sriram E</span>
+                                <span>{{ card.card_holder }}</span>
                             </div>
                         </div>
                     </div>
+                    {% endfor %}
 
                     <!-- Networth Section -->
                     <div class="networth-section">
@@ -135,7 +148,9 @@
             </div>
         </main>
     </div>
-    <script src="js/chatbot.js"></script>
-    <script src="js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{{ url_for('static', filename='js/ai-analysis.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
-</html> 
+</html>

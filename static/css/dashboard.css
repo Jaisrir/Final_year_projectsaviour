@@ -25,6 +25,7 @@ header {
 .card-section {
     display: flex;
     gap: 30px;
+    flex-wrap: wrap;
 }
 
 .virtual-card {
@@ -37,6 +38,8 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    margin-right: 20px;
+    position: relative;
 }
 
 .card-logos {
