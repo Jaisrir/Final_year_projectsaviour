@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saviour - Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="logo">
+                <h2>Saviour</h2>
+            </div>
+            
+            <button class="transfer-btn">Transfer money</button>
+            
+            <ul class="nav-links">
+                <li class="active" data-page="dashboard">
+                    <a href="{{ url_for('index') }}">
+                        <span class="icon">⊞</span>
+                        Dashboard
+                    </a>
+                </li>
+                <li data-page="cards">
+                    <a href="{{ url_for('cards_page') }}">
+                        <span class="icon">💳</span>
+                        Cards
+                    </a>
+                </li>
+                <li data-page="transactions">
+                    <a href="{{ url_for('transactions_page') }}">
+                        <span class="icon">⏱</span>
+                        Transactions
+                    </a>
+                </li>
+                <li data-page="profile">
+                    <a href="{{ url_for('profile') }}">
+                        <span class="icon">👤</span>
+                        Profile
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="chatbot-section">
+                <button class="chatbot-toggle">
+                    <span class="bot-icon">🤖</span>
+                    <span class="bot-text">Chatbot</span>
+                </button>
+                
+                <!-- Chatbot Popup -->
+                <div class="chatbot-popup" id="chatbotPopup">
+                    <div class="chatbot-header">
+                        <h3>Chatbot Assistant</h3>
+                        <button class="close-chat">×</button>
+                    </div>
+                    <div class="chat-messages" id="chatMessages">
+                        <!-- Messages will be added here -->
+                        <div class="message bot">
+                            Hello! I'm your financial assistant. How can I help you today?
+                        </div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="userInput" placeholder="Type your message...">
+                        <button id="sendMessage">Send</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+    <div class="profile-container">
+        <div class="profile-card">
+            <div class="profile-content">
+                <!-- Left Container -->
+                <div class="profile-left">
+                    <div class="profile-image-container">
+                        {% if profile.profile_image %}
+                            <img src="{{ url_for('static', filename=profile.profile_image) }}" 
+                                 class="profile-image" 
+                                 alt="Profile Image">
+                        {% else %}
+                            <div class="profile-image placeholder">👤</div>
+                        {% endif %}
+                        <label for="profileImage" class="change-photo-btn">
+                            Change Photo
+                        </label>
+                        <input type="file" 
+                               id="profileImage" 
+                               name="profileImage" 
+                               accept="image/*" 
+                               style="display: none;">
+                    </div>
+                    
+                    <div class="name-section">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" 
+                                   id="firstName" 
+                                   name="firstName" 
+                                   value="{{ profile.first_name }}" 
+                                   required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" 
+                                   id="lastName" 
+                                   name="lastName" 
+                                   value="{{ profile.last_name }}" 
+                                   required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Container -->
+                <div class="profile-right">
+                    <div class="details-section">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" 
+                                   id="email" 
+                                   name="email" 
+                                   value="{{ profile.email }}" 
+                                   required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" 
+                                   id="phone" 
+                                   name="phone" 
+                                   value="{{ profile.phone }}" 
+                                   required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="dob">Date of Birth</label>
+                            <input type="date" 
+                                   id="dob" 
+                                   name="dob" 
+                                   value="{{ profile.dob }}" 
+                                   required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="gender">Gender</label>
+                            <select id="gender" name="gender" required>
+                                <option value="male" {% if profile.gender == 'male' %}selected{% endif %}>
+                                    Male
+                                </option>
+                                <option value="female" {% if profile.gender == 'female' %}selected{% endif %}>
+                                    Female
+                                </option>
+                                <option value="other" {% if profile.gender == 'other' %}selected{% endif %}>
+                                    Other
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Centered Buttons -->
+            <div class="form-actions">
+                <a href="{{ url_for('index') }}" class="cancel-btn">Cancel</a>
+                <button type="submit" class="save-btn">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

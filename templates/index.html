@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saviour - Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="logo">
+                <h2>Saviour</h2>
+            </div>
+            
+            <button class="transfer-btn">Transfer money</button>
+            
+            <ul class="nav-links">
+                <li class="active" data-page="dashboard">
+                    <a href="{{ url_for('index') }}">
+                        <span class="icon">⊞</span>
+                        Dashboard
+                    </a>
+                </li>
+                <li data-page="cards">
+                    <a href="{{ url_for('cards_page') }}">
+                        <span class="icon">💳</span>
+                        Cards
+                    </a>
+                </li>
+                <li data-page="transactions">
+                    <a href="{{ url_for('transactions_page') }}">
+                        <span class="icon">⏱</span>
+                        Transactions
+                    </a>
+                </li>
+                <li data-page="profile">
+                    <a href="{{ url_for('profile') }}">
+                        <span class="icon">👤</span>
+                        Profile
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="chatbot-section">
+                <button class="chatbot-toggle">
+                    <span class="bot-icon">🤖</span>
+                    <span class="bot-text">Chatbot</span>
+                </button>
+                
+                <!-- Chatbot Popup -->
+                <div class="chatbot-popup" id="chatbotPopup">
+                    <div class="chatbot-header">
+                        <h3>Chatbot Assistant</h3>
+                        <button class="close-chat">×</button>
+                    </div>
+                    <div class="chat-messages" id="chatMessages">
+                        <!-- Messages will be added here -->
+                        <div class="message bot">
+                            Hello! I'm your financial assistant. How can I help you today?
+                        </div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="userInput" placeholder="Type your message...">
+                        <button id="sendMessage">Send</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <h1>Overview</h1>
+                <div class="header-right">
+                    <span class="notifications">🔔</span>
+                    <a href="{{ url_for('profile') }}" class="profile">👤</a>
+                    <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <!-- Card Section -->
+                <div class="card-section">
+                    <!-- Existing Virtual Cards -->
+                    {% for card in cards %}
+                    <div class="virtual-card">
+                        <div class="card-logos">
+                            <span class="mastercard-logo">○○</span>
+                            <span class="apple-pay">{{ card.card_type|upper }}</span>
+                        </div>
+                        <div class="card-number">
+                            {% for _ in range(3) %}•••• {% endfor %}{{ card.card_number[-4:] }}
+                        </div>
+                        <div class="card-details">
+                            <div class="valid-thru">
+                                <span>VALID THRU</span>
+                                <span>{{ card.expiry_date }}</span>
+                            </div>
+                            <div class="card-holder">
+                                <span>CARD HOLDER</span>
+                                <span>{{ card.card_holder }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    <!-- Networth Section -->
+                    <div class="networth-section">
+                        <h2>Networth</h2>
+                        <h1>₹12,08,592</h1>
+                        <div class="financial-breakdown">
+                            <div class="breakdown-item">
+                                <span>Current Balance</span>
+                                <span class="amount blue">₹2,03,050</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span>Credits</span>
+                                <span class="amount green">₹10,05,442</span>
+                            </div>
+                            <div class="breakdown-item">
+                                <span>Debits</span>
+                                <span class="amount red">₹70,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="charts-section">
+                    <div class="credit-usage">
+                        <h3>Debits</h3>
+                        <div class="chart-container">
+                            <canvas id="creditChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="spending-insights">
+                        <h3>Spending Insights</h3>
+                        <div class="chart-container">
+                            <canvas id="spendingChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{{ url_for('static', filename='js/ai-analysis.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
